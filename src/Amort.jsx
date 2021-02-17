@@ -1,4 +1,10 @@
 import React, {Component} from 'react'
+import Card from 'react-bootstrap/Card'
+import ListGroup from 'react-bootstrap/ListGroup'
+import Spreadsheet from "react-spreadsheet";
+import Button from 'react-bootstrap/Button'
+import Form  from 'react-bootstrap/Form';
+import 'bootstrap/dist/css/bootstrap.min.css';
 class Amort extends React.Component {
     render(){
         return (
@@ -14,8 +20,17 @@ class ShowAppreciation extends React.Component{
     render(){
         return (
             <div>
-                {this.props.data.map((item)=> <p key={item}>{item}</p>)}
+                <Card style={{ width: '18rem' }}>
+                    <ListGroup varian='list-group-flush'>
+                        {this.props.data.map((item)=> <ListGroup.Item key={item}>{item}</ListGroup.Item>)}
+                    </ListGroup>
+                </Card>
+                <div>
+                    <Spreadsheet data={0}></Spreadsheet>
+                </div>
+                
             </div>
+                
             
         )
     }
@@ -67,45 +82,45 @@ class OrganizeData extends React.Component{
     }
     render(){
         return(
-        <form>
-            <div>
-                <label>Interest</label>
-                <input 
+        <Form>
+            <Form.Group>
+                <Form.Label>Interest</Form.Label>
+                <Form.Control type = 'input' placeholder = 'Enter Interest on loan'
                 type="text"
                 onChange={(e) => this.setValForState(e,"interest")}/>
-            </div>
+            </Form.Group>
                 
-            <div>
-                <label>House Price    </label>
-                <input 
+            <Form.Group>
+                <Form.Label>House Price</Form.Label>
+                <Form.Control type = 'input' placeholder= 'Enter the sale price of property'
                 type="text"
                 onChange={(e) => this.setValForState(e,"housePrice")}/>
-            </div>
+            </Form.Group>
 
-            <div>
-                <label>Years to Own   </label>
-                <input 
+            <Form.Group>
+                <Form.Label>Years to Own</Form.Label>
+                <Form.Control type = 'input' placeholder= 'How many years to own'
                 type="text"
                 onChange={(e) => this.setValForState(e,"yearsToOwn")}/>
-            </div>
+            </Form.Group>
 
-            <div>
-                <label>Percent Increase   </label>
-                <input 
+            <Form.Group>
+                <Form.Label>Expected Percent Increase/year</Form.Label>
+                <Form.Control type = 'input' placeholder= 'Expected increase per year'
                 type="text"
                 onChange={(e) => this.setValForState(e,"percentIncrease")}/>
-            </div>
+            </Form.Group>
 
-            <button 
-            type="button"
+            <Button 
+            variant="Primary"
             onClick={this.calculateAppreciation}
             >
             Calculate Appreciation
-            </button>
+            </Button>
                 
             <ShowAppreciation data={this.state.increaseOverYears}/>
                 
-            </form>
+            </Form>
         )
 
     }
